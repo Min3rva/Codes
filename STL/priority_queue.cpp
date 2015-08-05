@@ -10,6 +10,26 @@
 
 using namespace std;
 
+
+/* Essa clase pode ser utilizada para tratar de estruturas em lista prioritária
+*  Por default ela ela funciona como o less<T>
+*  Passando cmp(true) irá funcionar como greater<T>
+*/
+
+class cmp
+{
+  bool reverse;
+public:
+  cmp(const bool& revparam=false)
+    {reverse=revparam;}
+  bool operator() (int left, int right)
+  {
+    if (reverse) return (left>right);
+    else return (left<right);
+  }
+};
+
+
 int main()
 {
 
@@ -19,7 +39,7 @@ int main()
 	** 		less<int> 	 maior->maior (default)
 	***/
 
-	priority_queue<int, vector<int>, greater<int> > fila;
+	priority_queue<int, vector<int>, cmp > fila;
 
 	fila.push(10);
 	fila.push(1);
